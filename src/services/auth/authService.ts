@@ -5,7 +5,7 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
-  UserCredential,
+  type UserCredential,
 } from 'firebase/auth';
 
 const FIREBASE_NOT_CONFIGURED_ERROR = 
