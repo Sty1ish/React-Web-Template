@@ -8,8 +8,17 @@
 - 어디서든 호출 가능
 - 계산, 변환, 포맷, 검증 등의 로직
 
+## 구조
+
+```
+utils/
+├── formatDate.ts     # 날짜 포맷팅
+└── validators.ts     # 유효성 검증
+```
+
 ## 예시
 
+### 날짜 포맷
 ```ts
 // utils/formatDate.ts
 export const formatDate = (date: Date | string): string => {
@@ -19,7 +28,10 @@ export const formatDate = (date: Date | string): string => {
     day: 'numeric',
   });
 };
+```
 
+### 유효성 검증
+```ts
 // utils/validators.ts
 export const isValidEmail = (email: string): boolean => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

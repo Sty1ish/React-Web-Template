@@ -56,34 +56,154 @@ src/
 
 ## 🛠 기술 스택
 
-- **React** 18+ - UI 라이브러리
-- **TypeScript** - 타입 안정성
-- **Vite** - 빌드 도구
-- **ESLint** - 코드 품질
+### 핵심
+- **React** 19+ - UI 라이브러리
+- **TypeScript** 5.9+ - 타입 안정성
+- **Vite** 8.0+ - 빌드 도구
+- **Tailwind CSS** 3+ - 유틸리티 우선 스타일링
 
-## 📦 추천 패키지
+### 상태 관리 & 데이터
+- **Zustand** - 경량 상태 관리
+- **React Query** - 서버 상태 관리
+- **Axios** - HTTP 클라이언트
 
-```bash
-# 라우팅
-npm install react-router-dom
+### 라우팅 & 네비게이션
+- **React Router** - SPA 라우팅
 
-# 상태 관리
-npm install zustand
+### 폼 & 유효성 검증
+- **React Hook Form** - 고성능 폼
+- **Formik** - 폼 관리 대안
+- **Zod** - TypeScript 우선 스키마 검증
+- **Yup** - 스키마 검증 대안
 
-# API 통신
-npm install axios
+### UI & 애니메이션
+- **Framer Motion** - 애니메이션 라이브러리
+- **Lucide React** - 아이콘 라이브러리
+- **React Hot Toast** - 알림 토스트
+- **Swiper** - 터치 슬라이더/캐러셀
+- **@use-gesture/react** - 제스처 핸들링
 
-# 폼 관리
-npm install react-hook-form zod
+### 데이터 시각화
+- **Recharts** - 차트 라이브러리
+- **React Big Calendar** - 캘린더 컴포넌트
 
-# UI 라이브러리
-npm install @radix-ui/react-*
+### 파일 & 이미지
+- **React Dropzone** - 파일 업로드
+- **React Image Crop** - 이미지 크롭
 
-# 유틸리티
-npm install clsx tailwind-merge date-fns
+### Firebase
+- **Firebase** - 인증, 데이터베이스, 스토리지, 분석
+
+### 유틸리티
+- **date-fns** - 날짜 유틸리티
+- **clsx** - 조건부 클래스명
+- **nanoid** - 고유 ID 생성
+- **localforage** - 향상된 로컬 스토리지
+- **js-cookie** - 쿠키 관리
+- **react-use** - 유용한 React 훅 모음
+
+## 📦 설치된 패키지
+
+모든 필수 패키지가 이미 설치되어 있습니다! 추가 설치 없이 바로 개발을 시작할 수 있습니다.
+
+## 🎨 스타일링
+
+**Tailwind CSS**가 기본 설정되어 있습니다:
+- CSS Modules과 함께 사용 가능
+- 유틸리티 클래스로 빠른 스타일링
+- 커스텀 디자인 시스템 (CSS 변수 연동)
+
+## 📝 주요 기능
+
+### 1. 인증 (Firebase)
+```tsx
+import { useAuth } from '@/hooks/useAuth';
+
+function LoginPage() {
+  const { login, loginWithGoogle, isLoading } = useAuth();
+
+  const handleLogin = async () => {
+    await login('email@example.com', 'password');
+  };
+
+  return <button onClick={loginWithGoogle}>Google 로그인</button>;
+}
 ```
 
-## 🎨 스타일링 옵션
+### 2. API 요청 (React Query)
+```tsx
+import { useUser } from '@/hooks/useUser';
+
+function UserProfile({ userId }: { userId: string }) {
+  const { data: user, isLoading } = useUser(userId);
+
+  if (isLoading) return <div>Loading...</div>;
+  return <div>{user?.name}</div>;
+}
+```
+
+### 3. 상태 관리 (Zustand)
+```tsx
+import { useAuthStore } from '@/stores/authStore';
+
+function Profile() {
+  const { user, logout } = useAuthStore();
+
+  return (
+    <div>
+      <p>{user?.name}</p>
+      <button onClick={logout}>로그아웃</button>
+    </div>
+  );
+}
+```
+
+### 4. 폼 관리 (React Hook Form + Zod)
+```tsx
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+function LoginForm() {
+  const { register, handleSubmit } = useForm({
+    resolver: zodResolver(schema),
+  });
+
+  return (
+    <form onSubmit={handleSubmit((data) => console.log(data))}>
+      <input {...register('email')} />
+      <input {...register('password')} type="password" />
+      <button type="submit">로그인</button>
+    </form>
+  );
+}
+```
+
+### 5. 알림 (React Hot Toast)
+```tsx
+import toast from 'react-hot-toast';
+
+toast.success('성공!');
+toast.error('에러 발생');
+toast.loading('로딩 중...');
+```
+
+## ⚙️ 환경 설정
+
+1. `.env.example`을 복사해서 `.env.local` 생성
+2. Firebase 설정 값 입력
+3. API URL 설정
+
+```bash
+cp .env.example .env.local
+```
+
+## 🔧 VSCode 추천 확장
 
 - **CSS Modules** (기본 설정)
 - **Tailwind CSS** - 유틸리티 우선
