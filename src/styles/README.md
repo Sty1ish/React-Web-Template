@@ -30,14 +30,14 @@ styles/
   --color-secondary: #6c757d;
   --color-success: #28a745;
   --color-danger: #dc3545;
-  
+
   /* Spacing */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
-  
+
   /* Typography */
   --font-family: 'Inter', -apple-system, sans-serif;
   --font-size-base: 16px;

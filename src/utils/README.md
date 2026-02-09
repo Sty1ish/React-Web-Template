@@ -19,6 +19,7 @@ utils/
 ## 예시
 
 ### 날짜 포맷
+
 ```ts
 // utils/formatDate.ts
 export const formatDate = (date: Date | string): string => {
@@ -31,6 +32,7 @@ export const formatDate = (date: Date | string): string => {
 ```
 
 ### 유효성 검증
+
 ```ts
 // utils/validators.ts
 export const isValidEmail = (email: string): boolean => {

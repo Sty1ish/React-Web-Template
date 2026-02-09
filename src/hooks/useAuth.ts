@@ -13,6 +13,12 @@ export const useAuth = () => {
   const { user, login, logout } = useAuthStore();
 
   useEffect(() => {
+    // Firebase가 설정되지 않은 경우
+    if (!auth) {
+      setIsLoading(false);
+      return;
+    }
+
     // Firebase 인증 상태 변경 리스너
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {

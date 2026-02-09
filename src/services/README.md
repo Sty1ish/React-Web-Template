@@ -22,13 +22,15 @@ services/
     └── types.ts        # 사용자 타입 (User 등)
 ```
 
-> **📁 구조 철학**: 
+> **📁 구조 철학**:
+>
 > - **config/**: 앱 전체에서 사용하는 기반 설정 (axios, Firebase, React Query)
 > - **feature/**: 기능별 비즈니스 로직과 타입을 함께 관리하여 확장성 향상
 
 ## 사용 예시
 
 ### Axios (API 클라이언트)
+
 ```ts
 import { apiClient } from '@/services/config';
 
@@ -39,6 +41,7 @@ const fetchUser = async (id: string) => {
 ```
 
 ### Firebase Auth
+
 ```ts
 import { authService } from '@/services/auth';
 
@@ -49,6 +52,7 @@ const login = async (email: string, password: string) => {
 ```
 
 ### User Service
+
 ```ts
 import { userService, type User } from '@/services/user';
 
@@ -59,6 +63,7 @@ const updateProfile = async (userId: string, data: Partial<User>) => {
 ```
 
 ### React Query
+
 ```ts
 import { queryClient } from '@/services/config';
 import { useQuery } from '@tanstack/react-query';

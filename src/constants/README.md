@@ -15,6 +15,7 @@ constants/
 ## 예시
 
 ### 라우트 경로
+
 ```ts
 // constants/routes.ts
 export const ROUTES = {
@@ -26,6 +27,7 @@ export const ROUTES = {
 ```
 
 ### API 엔드포인트
+
 ```ts
 // constants/api.ts
 export const API_ENDPOINTS = {
@@ -41,6 +43,7 @@ export const API_ENDPOINTS = {
 ```
 
 ### 앱 상수
+
 ```ts
 // constants/app.ts
 export const STORAGE_KEYS = {
