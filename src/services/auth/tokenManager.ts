@@ -84,8 +84,11 @@ async function refreshAccessTokenRaw(
     // http.ts에서 toUrl 로직을 복제하거나 해당 모듈이 export하는 base URL 사용
     const baseUrl = USERS_API_URL || import.meta.env.VITE_API_URL || '/api';
     const finalUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+
+    // API_ENDPOINTS 상수를 dynamic import로 가져와 사용
+    const { API_ENDPOINTS } = await import('../../constants/api');
     
-    const res = await fetch(`${finalUrl}/auth/access-token/refresh`, {
+    const res = await fetch(`${finalUrl}${API_ENDPOINTS.AUTH.REFRESH}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

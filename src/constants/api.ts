@@ -14,13 +14,15 @@ export const HTTP_STATUS = {
 
 /**
  * API 엔드포인트
+ * 
+ * 실제 코드에서 사용 중인 경로와 일치하도록 관리합니다.
  */
 export const API_ENDPOINTS = {
   AUTH: {
-    LOGIN: '/auth/login',
-    LOGOUT: '/auth/logout',
-    REFRESH: '/auth/refresh',
-    SIGNUP: '/auth/signup',
+    /** OAuth 로그인: POST /auth/login/oauth2/{provider} */
+    OAUTH_LOGIN: (provider: string) => `/auth/login/oauth2/${provider}`,
+    /** Access Token 갱신: POST /auth/access-token/refresh */
+    REFRESH: '/auth/access-token/refresh',
   },
   USERS: {
     LIST: '/users',

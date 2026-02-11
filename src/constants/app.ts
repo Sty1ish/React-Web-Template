@@ -7,11 +7,12 @@ export const APP_VERSION = import.meta.env.VITE_APP_VERSION || '1.0.0';
 
 /**
  * 로컬 스토리지 키
+ * 
+ * 참고: 인증 토큰(AccessToken, RefreshToken)은 Zustand persist가
+ * 'auth-storage' 키로 직접 관리하므로 여기에 포함하지 않습니다.
+ * AccessToken은 메모리(TokenManager)에서만 관리됩니다.
  */
 export const STORAGE_KEYS = {
-  ACCESS_TOKEN: 'accessToken',
-  REFRESH_TOKEN: 'refreshToken',
-  USER: 'user',
   THEME: 'theme',
   LANGUAGE: 'language',
 } as const;

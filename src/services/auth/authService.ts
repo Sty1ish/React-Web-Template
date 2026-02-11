@@ -9,13 +9,8 @@ import {
 } from 'firebase/auth';
 import { http } from '@/services/config/http';
 import { TokenManager } from '@/services/auth/tokenManager';
-
-// 서버의 로그인 응답 타입 (userRequest 참고)
-interface ServerLoginResponse {
-  accessToken: string;
-  refreshToken: string;
-  tokenType: string;
-}
+import { API_ENDPOINTS } from '@/constants';
+import type { ServerLoginResponse } from './types';
 
 const FIREBASE_NOT_CONFIGURED_ERROR = 
   'Firebase가 설정되지 않았습니다. .env.local 파일에 Firebase 설정을 추가해주세요.';
@@ -25,7 +20,7 @@ const FIREBASE_NOT_CONFIGURED_ERROR =
  */
 const syncWithServer = async (provider: string, idToken: string) => {
   const res = await http<ServerLoginResponse>(
-    `/auth/login/oauth2/${provider}`,
+    API_ENDPOINTS.AUTH.OAUTH_LOGIN(provider),
     'POST',
     {
       auth: 'none',
