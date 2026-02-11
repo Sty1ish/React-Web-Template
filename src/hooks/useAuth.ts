@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
+import { onAuthStateChanged, type User as FirebaseUser } from 'firebase/auth';
 import { auth } from '@/services/config';
 import { authService } from '@/services/auth';
 import { useAuthStore } from '@/stores/authStore';
@@ -20,15 +20,18 @@ export const useAuth = () => {
     }
 
     // Firebase 인증 상태 변경 리스너
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser: FirebaseUser | null) => {
       if (firebaseUser) {
+        // 현재 저장된 refresh token 확인
+        const currentRefreshToken = useAuthStore.getState().refreshToken || '';
+        
         // 로그인 상태
         login({
           id: firebaseUser.uid,
           email: firebaseUser.email || '',
           name: firebaseUser.displayName || '',
           avatar: firebaseUser.photoURL || undefined,
-        });
+        }, currentRefreshToken);
       } else {
         // 로그아웃 상태
         logout();

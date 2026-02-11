@@ -1,5 +1,5 @@
 // API & HTTP Client
-export * from './api';
+export * from './http';
 
 // Firebase
 export * from './firebase';

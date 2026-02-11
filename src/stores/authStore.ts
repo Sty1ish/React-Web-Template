@@ -10,11 +10,13 @@ interface User {
 
 interface AuthState {
   user: User | null;
+  refreshToken: string | null; // AccessToken은 TokenManager가 메모리 관리
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (user: User) => void;
+  login: (user: User, refreshToken: string) => void;
   logout: () => void;
   updateUser: (user: Partial<User>) => void;
+  setRefreshToken: (token: string) => void;
 }
 
 /**
@@ -25,12 +27,14 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
+      refreshToken: null,
       isAuthenticated: false,
       isLoading: false,
 
-      login: (user) =>
+      login: (user, refreshToken) =>
         set({
           user,
+          refreshToken,
           isAuthenticated: true,
           isLoading: false,
         }),
@@ -38,6 +42,7 @@ export const useAuthStore = create<AuthState>()(
       logout: () =>
         set({
           user: null,
+          refreshToken: null,
           isAuthenticated: false,
           isLoading: false,
         }),
@@ -46,9 +51,17 @@ export const useAuthStore = create<AuthState>()(
         set((state) => ({
           user: state.user ? { ...state.user, ...updatedUser } : null,
         })),
+
+      setRefreshToken: (token) => set({ refreshToken: token }),
     }),
     {
       name: 'auth-storage',
+      // AccessToken은 저장하지 않음 (메모리 관리)
+      partialize: (state) => ({ 
+        user: state.user, 
+        refreshToken: state.refreshToken,
+        isAuthenticated: state.isAuthenticated 
+      }),
     }
   )
 );

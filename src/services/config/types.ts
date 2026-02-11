@@ -1,9 +1,12 @@
 // 공통 API 타입 정의
 
 export interface ApiResponse<T = unknown> {
+  timestamp: string;
+  status: number;
   data: T;
   message: string;
-  success: boolean;
+  code: string;
+  path?: string;
 }
 
 export interface ApiError {

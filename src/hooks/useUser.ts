@@ -32,7 +32,7 @@ export const useUpdateUser = () => {
   return useMutation({
     mutationFn: ({ id, data }: { id: string; data: Partial<User> }) =>
       userService.updateUser(id, data),
-    onSuccess: (updatedUser) => {
+    onSuccess: () => {
       // 캐시 업데이트
       queryClient.invalidateQueries({ queryKey: ['user'] });
       toast.success('사용자 정보가 업데이트되었습니다.');
